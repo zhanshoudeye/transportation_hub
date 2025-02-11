@@ -2,7 +2,7 @@
 // Created by baiye on 25-1-27.
 //
 
-#include "../include/transportation_hub/dijkstra.h"
+#include "dijkstra.h"
 //存储不同城市序号与城市之间的距离
 void Dijkstra::add_edge(int src, int dest, int length){
     graph[src].push_back(std::make_pair(dest, length));

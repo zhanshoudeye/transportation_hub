@@ -8,22 +8,20 @@ endif()
 # find dependencies
 
 find_package(ament_cmake_auto REQUIRED)
-
+ament_auto_find_build_dependencies()
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-ament_auto_find_build_dependencies()
-rosidl_generate_interfaces(
-        ${PROJECT_NAME}
-        "msg/MyAnswer.msg"
-        "msg/OverallInfo.msg"
-        "msg/RoadInfo.msg"
-        "../judger_interfaces/srv/MyService.srv"
-        DEPENDENCIES ${${PROJECT_NAME}_FOUND_BUILD_DEPENDS}
+include_directories(${EIGEN3_INCLUDE_DIR})
+include_directories(include)
+
+ament_auto_add_executable(${PROJECT_NAME}_node
+        src/main.cpp
+        src/transportation_hub_node.cpp
+        src/dijkstra.cpp
 )
-include_directories(include/transportation_hub)
-ament_auto_add_executable(${PROJECT_NAME}_node src/main.cpp)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -37,4 +35,4 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
+ament_auto_package()

@@ -5,15 +5,15 @@
 #ifndef TRANSPORTATION_HUB_NODE_H
 #define TRANSPORTATION_HUB_NODE_H
 
-#include <rclcpp/rclcpp.hpp>
 #include <vector>
-#include "judger_interfaces/srv/my_service.hpp"
-#include "transportation_hub/msg/overall_info.hpp"
-#include "transportation_hub/msg/my_answer.hpp"
+#include <rclcpp/rclcpp.hpp>
 #include "dijkstra.h"
-using  Server = judger_interfaces::srv::MyService;
-using Question = transportation_hub::msg::OverallInfo;
-using Answer = transportation_hub::msg::MyAnswer;
+#include "judger_interfaces/srv/my_service.hpp"
+#include "judger_interfaces/msg/my_answer.hpp"
+#include "judger_interfaces/msg/overall_info.hpp"
+using Server = judger_interfaces::srv::MyService;
+using Question = judger_interfaces::msg::OverallInfo;
+using Answer = judger_interfaces::msg::MyAnswer;
 
 class transportation_client : public rclcpp::Node{
 private:
@@ -22,6 +22,7 @@ private:
     Answer answer_;
     //回调函数
     void question_callback(const Question::SharedPtr msg);
+    void send_answer(const Answer answer);
 public:
   //构造函数
     transportation_client();
